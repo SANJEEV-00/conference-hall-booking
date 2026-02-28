@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* Smooth scroll for anchor links (landing #halls, #recommend) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Theme variables for glassmorphism and dark/light mode - Formal color palette */
+:root {
+  --bg-primary: 248 250 252;
+  --bg-secondary: 241 245 249;
+  --text-primary: 15 23 42;
+  --text-secondary: 71 85 105;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-strong-bg: rgba(255, 255, 255, 0.85);
+  --glass-subtle-bg: rgba(255, 255, 255, 0.4);
+  /* Formal colors: Navy, Burgundy, Gold */
+  --primary: 30 58 138;        /* Navy blue */
+  --primary-dark: 15 23 42;    /* Deep navy */
+  --accent: 185 28 28;         /* Burgundy */
+  --accent-light: 220 38 38;   /* Lighter burgundy */
+  --gold: 217 119 6;           /* Gold accent */
+  --gold-light: 245 158 11;    /* Lighter gold */
+  --text-formal: 15 23 42;     /* Deep navy text */
+  --bg-formal: 248 250 252;    /* Off-white */
+  --bg-formal-dark: 30 41 59;  /* Dark slate */
+  --success: 34 197 94;
+  --warning: 234 179 8;
+  --error: 239 68 68;
+}
+
+.dark {
+  --bg-primary: 15 23 42;
+  --bg-secondary: 30 41 59;
+  --text-primary: 248 250 252;
+  --text-secondary: 148 163 184;
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-strong-bg: rgba(15, 23, 42, 0.9);
+  --glass-subtle-bg: rgba(15, 23, 42, 0.4);
+  /* Formal colors for dark mode */
+  --primary: 59 130 246;       /* Bright blue */
+  --accent: 239 68 68;         /* Red */
+  --gold: 245 158 11;          /* Gold */
+  --text-formal: 248 250 252;
+  --bg-formal-dark: 15 23 42;
+}
+
+/* Glassmorphism: default, stronger (header/footer), subtle (sections) */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  border-width: 1px;
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+
+.glass-strong {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: var(--glass-strong-bg);
+  border-color: var(--glass-border);
+}
+
+.glass-subtle {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: var(--glass-subtle-bg);
+  border-color: var(--glass-border);
+}
+
+/* Status badge colors */
+.badge-pending { @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400; }
+.badge-approved { @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400; }
+.badge-rejected { @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400; }
+
+body {
+  @apply bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 antialiased min-h-screen;
+}
