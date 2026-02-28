@@ -65,16 +65,16 @@ export function Landing() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 dark:opacity-30"
           style={{
-            backgroundImage:  `url(${bgimg})`,
+            backgroundImage: `url(${bgimg})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/90 to-slate-50 dark:from-slate-900 dark:via-slate-900/80 dark:to-slate-950" />
         <div className="relative z-10 w-full px-4 md:px-6 lg:px-8 mx-auto text-center max-w-6xl">
-           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-transparent tracking-tight leading-tight">
-                Jai Shriram Engineering College
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-transparent tracking-tight leading-tight">
+            Jai Shriram Engineering College
           </h1>
           <h1 className="text-2xl md:text-2xl font-bold text-slate-900 dark:text-slate-500 tracking-tight">
-            Book the perfect Event hall Booking
+            Book the perfect event hall for your next occasion!
           </h1>
           <p className="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Choose from multiple venues, get recommendations by capacity and date, and manage your bookings in one place.
