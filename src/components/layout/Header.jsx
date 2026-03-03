@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 
@@ -12,6 +12,7 @@ export function Header() {
   const { user, role, logout } = useAuth()
   const { isDark, toggleTheme } = useTheme()
   const location = useLocation()
+  const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [navHidden, setNavHidden] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
@@ -41,9 +42,8 @@ export function Header() {
     smoothScrollTo(id)
   }
 
-  const navClass = `fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
-    navHidden ? '-translate-y-full' : 'translate-y-0'
-  }`
+  const navClass = `fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${navHidden ? '-translate-y-full' : 'translate-y-0'
+    }`
 
   const linkClass =
     'px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-white/20 dark:hover:bg-slate-600/30 transition'
@@ -53,7 +53,7 @@ export function Header() {
       <div className="glass border-b border-white/10">
         <div className="w-full px-4 md:px-6 lg:px-8 py-3 flex items-center justify-between">
           <Link to="/" className="text-xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
-          Event Hall Booking 
+            Event Hall Booking
           </Link>
 
           {/* Desktop nav */}
@@ -88,13 +88,16 @@ export function Header() {
               {isDark ? '☀️' : '🌙'}
             </button>
             {user ? (
-              <Link
-                to="/"
-                onClick={() => { logout(); setMobileOpen(false); }}
+              <button
+                onClick={async () => {
+                  await logout();
+                  setMobileOpen(false);
+                  navigate('/');
+                }}
                 className="px-3 py-2 rounded-lg bg-slate-600 hover:bg-slate-700 dark:bg-slate-500 dark:hover:bg-slate-600 text-white text-sm font-medium transition"
               >
                 Logout
-              </Link>
+              </button>
             ) : (
               <Link to="/login" className="px-3 py-2 rounded-lg bg-blue-900 hover:bg-blue-800 dark:bg-blue-800 dark:hover:bg-blue-700 text-white text-sm font-medium transition">
                 Login
@@ -137,9 +140,16 @@ export function Header() {
               {isDark ? '☀️ Light mode' : '🌙 Dark mode'}
             </button>
             {user ? (
-              <Link to="/" onClick={() => { logout(); setMobileOpen(false); }} className={linkClass}>
+              <button
+                onClick={async () => {
+                  await logout();
+                  setMobileOpen(false);
+                  navigate('/');
+                }}
+                className={linkClass}
+              >
                 Logout
-              </Link>
+              </button>
             ) : (
               <Link to="/login" onClick={() => setMobileOpen(false)} className={linkClass}>
                 Login

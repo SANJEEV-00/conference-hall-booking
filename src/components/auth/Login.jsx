@@ -13,13 +13,13 @@ export function Login() {
   const location = useLocation()
   const from = location.state?.from?.pathname || '/'
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!email.trim() || !password) {
       toast.error('Please enter email and password.')
       return
     }
-    const result = login(email.trim(), password)
+    const result = await login(email.trim(), password)
     if (result.success) {
       const role = result.role || 'USER'
       toast.success('Logged in successfully.')
@@ -99,7 +99,7 @@ export function Login() {
             <p>snh@jsrec.in / Snh@123</p>
             <p>office@jsrec.in / Office@123</p>
             <p>tpc@jsrec.in / Tpc@123</p>
-         
+
           </div>
         </div>
       </div>
