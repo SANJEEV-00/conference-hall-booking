@@ -62,6 +62,16 @@ export function UserDashboard() {
   }, [])
 
   useEffect(() => {
+    const hash = location.hash.replace('#', '')
+    if (hash) {
+      setTimeout(() => {
+        const el = document.getElementById(hash)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
+  }, [location.hash])
+
+  useEffect(() => {
     const hallIdFromState = location.state?.hallId
     if (hallIdFromState) {
       getHalls().then((allHalls) => {

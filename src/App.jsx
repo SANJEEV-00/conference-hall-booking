@@ -8,6 +8,7 @@ import { Login } from './components/auth/Login'
 import { Landing } from './pages/Landing'
 import { AdminDashboard } from './pages/AdminDashboard'
 import { UserDashboard } from './pages/UserDashboard'
+import { Profile } from './pages/Profile'
 
 function RootRedirect() {
   const { user, role } = useAuth()
@@ -36,6 +37,14 @@ export default function App() {
               element={
                 <ProtectedRoute allowedRoles={['USER']}>
                   <Layout><UserDashboard /></Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                  <Layout><Profile /></Layout>
                 </ProtectedRoute>
               }
             />

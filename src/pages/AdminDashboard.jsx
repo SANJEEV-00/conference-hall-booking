@@ -160,7 +160,9 @@ export function AdminDashboard() {
                     ) : (
                       bookings.map((b) => (
                         <tr key={b.id} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                          <td className="p-3 text-slate-800 dark:text-slate-200">{b.hallName}</td>
+                          <td className="p-3 text-slate-800 dark:text-slate-200">
+                            {b.hallName || halls.find(h => h.id === b.hallId)?.name || '—'}
+                          </td>
                           <td className="p-3 text-slate-700 dark:text-slate-300">{b.userEmail}</td>
                           <td className="p-3 text-slate-700 dark:text-slate-300">{b.date}</td>
                           <td className="p-3 text-slate-700 dark:text-slate-300">{b.startTime} – {b.endTime}</td>

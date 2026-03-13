@@ -42,6 +42,32 @@ export function Header() {
     smoothScrollTo(id)
   }
 
+  const handleUserNav = (e, targetHash = '') => {
+    const isUserPage = location.pathname === '/user'
+    if (isUserPage) {
+      e.preventDefault()
+      setMobileOpen(false)
+      if (targetHash) {
+        smoothScrollTo(targetHash.replace('#', ''))
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    } else {
+      setMobileOpen(false)
+    }
+  }
+
+  const handleAdminNav = (e) => {
+    const isAdminPage = location.pathname === '/admin'
+    if (isAdminPage) {
+      e.preventDefault()
+      setMobileOpen(false)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      setMobileOpen(false)
+    }
+  }
+
   const navClass = `fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${navHidden ? '-translate-y-full' : 'translate-y-0'
     }`
 
@@ -53,7 +79,7 @@ export function Header() {
       <div className="glass border-b border-white/10">
         <div className="w-full px-4 md:px-6 lg:px-8 py-3 flex items-center justify-between">
           <Link to="/" className="text-xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
-            Event Hall Booking
+            {role === 'ADMIN' ? 'Admin Dashboard' : 'Event Hall Booking'}
           </Link>
 
           {/* Desktop nav */}
@@ -72,11 +98,17 @@ export function Header() {
               <>
                 {role === 'USER' && (
                   <>
-                    <Link to="/user" className={linkClass}>Dashboard</Link>
-                    <Link to="/user#bookings" className={linkClass}>My Bookings</Link>
+                    <Link to="/user" onClick={(e) => handleUserNav(e)} className={linkClass}>Dashboard</Link>
+                    <Link to="/user#bookings" onClick={(e) => handleUserNav(e, '#bookings')} className={linkClass}>My Bookings</Link>
+                    <Link to="/profile" onClick={() => setMobileOpen(false)} className={linkClass}>Profile</Link>
                   </>
                 )}
-                {role === 'ADMIN' && <Link to="/admin" className={linkClass}>Admin</Link>}
+                {role === 'ADMIN' && (
+                  <>
+                    <Link to="/admin" onClick={handleAdminNav} className={linkClass}>Admin</Link>
+                    <Link to="/profile" onClick={() => setMobileOpen(false)} className={linkClass}>Profile</Link>
+                  </>
+                )}
               </>
             )}
             <button
@@ -129,11 +161,17 @@ export function Header() {
               <>
                 {role === 'USER' && (
                   <>
-                    <Link to="/user" onClick={() => setMobileOpen(false)} className={linkClass}>Dashboard</Link>
-                    <Link to="/user" onClick={() => setMobileOpen(false)} className={linkClass}>My Bookings</Link>
+                    <Link to="/user" onClick={(e) => handleUserNav(e)} className={linkClass}>Dashboard</Link>
+                    <Link to="/user#bookings" onClick={(e) => handleUserNav(e, '#bookings')} className={linkClass}>My Bookings</Link>
+                    <Link to="/profile" onClick={() => setMobileOpen(false)} className={linkClass}>Profile</Link>
                   </>
                 )}
-                {role === 'ADMIN' && <Link to="/admin" onClick={() => setMobileOpen(false)} className={linkClass}>Admin</Link>}
+                {role === 'ADMIN' && (
+                  <>
+                    <Link to="/admin" onClick={handleAdminNav} className={linkClass}>Admin</Link>
+                    <Link to="/profile" onClick={() => setMobileOpen(false)} className={linkClass}>Profile</Link>
+                  </>
+                )}
               </>
             )}
             <button type="button" onClick={toggleTheme} className={`${linkClass} text-left`}>

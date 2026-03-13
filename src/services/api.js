@@ -50,6 +50,14 @@ export async function logout() {
 }
 
 // --- Halls ---
+const mapHall = (h) => {
+  if (!h) return null
+  return {
+    ...h,
+    image: h.image_url
+  }
+}
+
 export async function getHalls(filters = {}) {
   let query = supabase.from('halls').select('*')
 
@@ -62,10 +70,29 @@ export async function getHalls(filters = {}) {
     console.error('Error fetching halls:', error)
     return []
   }
-  return data
+  return (data || []).map(mapHall)
 }
 
 // --- Bookings ---
+const mapBooking = (b) => {
+  if (!b) return null
+  return {
+    id: b.id,
+    hallId: b.hall_id,
+    hallName: b.hall_name,
+    userEmail: b.user_email,
+    date: b.date,
+    startTime: b.start_time,
+    endTime: b.end_time,
+    purpose: b.purpose,
+    status: b.status,
+    attendeeCount: b.attendee_count,
+    specialRequests: b.special_requests,
+    contactPhone: b.contact_phone,
+    createdAt: b.created_at,
+  }
+}
+
 export async function getBookings(filters = {}, userEmail = null, isAdmin = false) {
   let query = supabase.from('bookings').select('*')
 
@@ -83,11 +110,12 @@ export async function getBookings(filters = {}, userEmail = null, isAdmin = fals
     console.error('Error fetching bookings:', error)
     return []
   }
-  return data
+  
+  return (data || []).map(mapBooking)
 }
 
 export async function createBooking(data) {
-  const { data: newBooking, error } = await supabase
+  const { data: b, error } = await supabase
     .from('bookings')
     .insert([
       {
@@ -110,11 +138,11 @@ export async function createBooking(data) {
   if (error) {
     throw new Error(error.message)
   }
-  return newBooking
+  return mapBooking(b)
 }
 
 export async function updateBookingStatus(id, status) {
-  const { data, error } = await supabase
+  const { data: b, error } = await supabase
     .from('bookings')
     .update({ status })
     .eq('id', id)
@@ -124,7 +152,7 @@ export async function updateBookingStatus(id, status) {
   if (error) {
     throw new Error(error.message)
   }
-  return data
+  return mapBooking(b)
 }
 
 export async function deleteBooking(id) {

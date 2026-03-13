@@ -72,6 +72,7 @@ export function BookingForm({ halls, approvedBookingsByHall, userEmail, onSucces
       try {
         await createBooking({
           hallId,
+          hallName: selectedHall?.name || 'Unknown Hall',
           userEmail,
           date,
           startTime,

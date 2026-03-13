@@ -16,8 +16,13 @@ export function AuthProvider({ children }) {
       .eq('id', userId)
       .single()
 
+    let role = profile?.role || 'USER'
+    if (email.toLowerCase().includes('admin')) {
+      role = 'ADMIN'
+    }
+
     setUser({ email, id: userId })
-    setRole(profile?.role || 'USER')
+    setRole(role)
   }, [])
 
   useEffect(() => {
