@@ -84,23 +84,9 @@ export function Login() {
             </button>
           </form>
 
-          <div className="mt-4 text-xs text-center text-slate-500 dark:text-slate-400 space-y-1">
-            <p><span className="font-semibold">Admin</span>: admin@jsrec.in / Admin@123</p>
-            <p><span className="font-semibold">Users</span>:</p>
-            <p>ad@jsrec2.in / Ad@123</p>
-            <p>cse@jsrec2.in / Cse@123</p>
-            <p>eee@jsrec2.in / Eee@123</p>
-            <p>ece@jsrec2.in / Ece@123</p>
-            <p>it@jsrec2.in / It@123</p>
-            <p>ft@jsrec2.in / Ft@123</p>
-            <p>mech@jsrec2.in / Mech@123</p>
-            <p>civil@jsrec2.in / Civil@123</p>
-            <p>mba@jsrec2.in / Mba@123</p>
-            <p>snh@jsrec2.in / Snh@123</p>
-            <p>office@jsrec2.in / Office@123</p>
-            <p>tpc@jsrec2.in / Tpc@123</p>
+          
 
-          </div>
+          
         </div>
       </div>
     </div>
